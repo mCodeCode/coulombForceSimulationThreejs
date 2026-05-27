@@ -170,31 +170,7 @@ function main() {
 
   // Start the loop
   intervalId = requestAnimationFrame(renderLoop);
-  // let lastTime = 0;
-  // function renderLoop() {
-  //   if (resizeRendererToDisplaySize(threeJsHelper.renderer)) {
-  //     const canvas = threeJsHelper.renderer.domElement;
-  //     threeJsHelper.camera.aspect = canvas.clientWidth / canvas.clientHeight;
-  //     threeJsHelper.camera.updateProjectionMatrix();
-  //   }
 
-  //   // Convert currentTime to seconds (e.g., 0.016 for 60fps)
-  //   let dt = (currentTime - lastTime) / 1000;
-  //   lastTime = currentTime;
-
-  //   // Prevent huge jumps if the user switches tabs
-  //   if (dt > 0.1) dt = 0.1;
-
-  //   //QQQ
-  //   updateSimulation(dt);
-
-  //   //render results on screen
-  //   threeJsHelper.renderer.render(threeJsHelper.scene, threeJsHelper.camera);
-
-  //   intervalId = requestAnimationFrame(renderLoop);
-  // }
-
-  // intervalId = requestAnimationFrame(renderLoop);
 }
 
 main();
