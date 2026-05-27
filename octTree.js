@@ -61,22 +61,7 @@ class Box3D {
 //* this process repeats, untill the point/all points are inserted into a quadtree
 //* each quadTree has a list of points to keep track of, along with a variable to check if its full
 
-/*
 
-Pro-Tip for your Implementation
-If you decide to store your children in an array (this.children[8]), you can actually calculate which index a particle belongs to using bitmasking.
-
-If you determine:
-
-ix = (px >= x + w) ? 1 : 0
-
-iy = (py >= y + h) ? 2 : 0
-
-iz = (pz >= z + d) ? 4 : 0
-
-Then index = ix + iy + iz will give you the exact number (0–7) from the table above! It’s a very common trick to avoid a long chain of if/else statements.
-
-*/
 
 class OctTree {
   // ---------------------------
@@ -122,19 +107,7 @@ class OctTree {
     let w = this.boundary.w / 2;
     let h = this.boundary.h / 2;
     let d = this.boundary.d / 2;
-
-    // // LAYER 1: Front (Z)
-    // this.frontTopLeft = new Octree(new Box(x, y, z, w, h, d));
-    // this.frontTopRight = new Octree(new Box(x + w, y, z, w, h, d));
-    // this.frontBottomLeft = new Octree(new Box(x, y + h, z, w, h, d));
-    // this.frontBottomRight = new Octree(new Box(x + w, y + h, z, w, h, d));
-
-    // // LAYER 2: Back (Z + D)
-    // this.backTopLeft = new Octree(new Box(x, y, z + d, w, h, d));
-    // this.backTopRight = new Octree(new Box(x + w, y, z + d, w, h, d));
-    // this.backBottomLeft = new Octree(new Box(x, y + h, z + d, w, h, d));
-    // this.backBottomRight = new Octree(new Box(x + w, y + h, z + d, w, h, d));
-
+    
     // LAYER 1: Front (Z)
     this.boundaryBranches.push(new OctTree(new Box3D(x, y, z, w, h, d)));
     this.boundaryBranches.push(new OctTree(new Box3D(x + w, y, z, w, h, d)));
@@ -227,50 +200,6 @@ class OctTree {
       }
     }
     return force;
-  }
-  // ---------------------------
-  // ---------------------------
-  query(range, found = []) {
-    // // Step A: If the range doesn't overlap this quadrant, stop searching here!
-    // if (!this.boundary.intersects(range)) {
-    //   return found;
-    // }
-    // // Step B: Check all the points stored *locally* in this specific quadrant
-    // for (let p of this.boundaryPoints) {
-    //   if (range.contains(p)) {
-    //     found.push(p);
-    //   }
-    // }
-    // // Step C: If this node has sub-quadrants, recursively query them too
-    // if (this.hasDivided) {
-    //   this.topLeftBoundary.query(range, found);
-    //   this.topRightBoundary.query(range, found);
-    //   this.bottomLeftBoundary.query(range, found);
-    //   this.bottomRightBoundary.query(range, found);
-    // }
-    // return found;
-  }
-  // ---------------------------
-  // ---------------------------
-  draw(drawHelper) {
-    //---
-    //----
-    // draw points inside boundary
-    // for (let i = 0; i < this.boundaryPoints.length; i++) {
-    //   const p = this.boundaryPoints[i];
-    //   let oct = drawHelper.drawOctahedronWithLines(p.size, colorList.neonOrange);
-    //   oct.mesh.position.set(p.x, p.y, p.z);
-    //   oct.wireframe.position.set(p.x, p.y, p.z);
-    //   drawHelper.scene.add(oct.mesh);
-    //   drawHelper.scene.add(oct.wireframe);
-    // }
-    // //---
-    // // draw subdivisions
-    // if (this.hasDivided) {
-    //   for (let br = 0; br < this.boundaryBranches.length; br++) {
-    //     this.boundaryBranches[br].draw(drawHelper);
-    //   }
-    // }
   }
 }
 
